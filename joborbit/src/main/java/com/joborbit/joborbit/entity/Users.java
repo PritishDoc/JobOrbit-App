@@ -1,37 +1,36 @@
 package com.joborbit.joborbit.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Best for MySQL
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
 
     @Column(unique = true)
     private String email;
 
-    @NotBlank // Ensures password is not null, empty, or whitespace
+    @NotEmpty
     private String password;
 
     private boolean isActive;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // Corrected date format
-    private LocalDate registrationDate; // Use LocalDate for better handling
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userTypeId", referencedColumnName = "id") // Ensure correct reference
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId") // Fixed reference
     private UsersType userType;
 
     public Users() {}
 
-    public Users(int userId, String email, String password, boolean isActive, LocalDate registrationDate, UsersType userType) {
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userType) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -72,11 +71,11 @@ public class Users {
         isActive = active;
     }
 
-    public LocalDate getRegistrationDate() {
+    public Date getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDate registrationDate) {
+    public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
     }
 

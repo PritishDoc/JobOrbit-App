@@ -8,15 +8,14 @@ import java.util.List;
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Best for MySQL
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int userTypeId;
 
     private String userTypeName;
 
-    @OneToMany(mappedBy = "userTypeId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL, orphanRemoval = true) // Fixed mapping
     private List<Users> users;
 
-    // Default constructor required by JPA
     public UsersType() {}
 
     public UsersType(int userTypeId, String userTypeName, List<Users> users) {
