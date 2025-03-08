@@ -1,8 +1,6 @@
 package com.joborbit.joborbit.entity;
 
 import jakarta.persistence.*;
-
-import java.lang.annotation.Target;
 import java.util.List;
 
 @Entity
@@ -10,14 +8,16 @@ import java.util.List;
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Best for MySQL
     private int userTypeId;
 
-    private  String userTypeName;
+    private String userTypeName;
 
-    @OneToMany(targetEntity =Users.class,mappedBy = "usersType")
+    @OneToMany(mappedBy = "userTypeId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Users> users;
 
+    // Default constructor required by JPA
+    public UsersType() {}
 
     public UsersType(int userTypeId, String userTypeName, List<Users> users) {
         this.userTypeId = userTypeId;

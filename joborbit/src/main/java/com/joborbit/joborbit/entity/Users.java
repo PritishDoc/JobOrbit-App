@@ -1,42 +1,43 @@
 package com.joborbit.joborbit.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Best for MySQL
     private int userId;
 
     @Column(unique = true)
     private String email;
 
-    @NotEmpty
+    @NotBlank // Ensures password is not null, empty, or whitespace
     private String password;
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registrationDate;  // Fixed typo
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Corrected date format
+    private LocalDate registrationDate; // Use LocalDate for better handling
 
-    @ManyToOne(cascade = CascadeType.ALL)  // Removed extra "="
-    @JoinColumn(name = "userTypeId", referencedColumnName = "usersTypeId") // Ensure correct reference
-    private UsersType userTypeId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userTypeId", referencedColumnName = "id") // Ensure correct reference
+    private UsersType userType;
 
     public Users() {}
 
-    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userTypeId) {
+    public Users(int userId, String email, String password, boolean isActive, LocalDate registrationDate, UsersType userType) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
         this.registrationDate = registrationDate;
-        this.userTypeId = userTypeId;
+        this.userType = userType;
     }
 
     public int getUserId() {
@@ -71,20 +72,20 @@ public class Users {
         isActive = active;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public UsersType getUserTypeId() {
-        return userTypeId;
+    public UsersType getUserType() {
+        return userType;
     }
 
-    public void setUserTypeId(UsersType userTypeId) {
-        this.userTypeId = userTypeId;
+    public void setUserType(UsersType userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -95,7 +96,7 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
                 ", registrationDate=" + registrationDate +
-                ", userTypeId=" + userTypeId +
+                ", userType=" + userType +
                 '}';
     }
 }
