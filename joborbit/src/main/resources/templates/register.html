@@ -56,6 +56,13 @@
                                     <div class="col-md-12 form-group">
                                         <select required class="form-control" th:field="*{userType}">
                                             <option value="" disabled selected>Select User Type</option>
+
+                                            <!-- Static options -->
+                                            <option value="1">Admin</option>
+                                            <option value="2">Employer</option>
+                                            <option value="3">Job Seeker</option>
+
+                                            <!-- Dynamic options from backend -->
                                             <th:block th:each="userType : ${getAllTypes}">
                                                 <option th:value="${userType.userTypeId}" th:text="${userType.userTypeName}"></option>
                                             </th:block>
