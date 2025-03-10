@@ -40,4 +40,13 @@ public class UsersController {
         usersService.addNew(users);  // No casting needed
         return "redirect:/dashboard";  // Redirect to dashboard after successful registration
     }
+    @Controller
+    public class DashboardController {
+
+        @GetMapping("/dashboard")
+        public String dashboard() {
+            return "dashboard"; // Ensure dashboard.html or dashboard.jsp exists
+        }
+    }
+
 }
