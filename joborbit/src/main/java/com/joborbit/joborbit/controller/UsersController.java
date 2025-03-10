@@ -3,8 +3,10 @@ package com.joborbit.joborbit.controller;
 import com.joborbit.joborbit.entity.Users;
 import com.joborbit.joborbit.entity.UsersType;
 import com.joborbit.joborbit.services.UserTypeService;
+import com.joborbit.joborbit.services.UsersService;
 import jakarta.validation.Valid;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,11 @@ import java.util.List;
 public class UsersController {
 
     private final UserTypeService userTypeService;
-
-    public UsersController(UserTypeService userTypeService) {
+    private final UsersService usersService;
+    @Autowired
+    public UsersController(UserTypeService userTypeService,UsersService usersService) {
         this.userTypeService = userTypeService;
+        this.usersService=usersService;
     }
 
     @GetMapping("/register")
@@ -31,6 +35,7 @@ public class UsersController {
     @PostMapping("/register/new")
     public String userRegistation(@Valid User users){
         System.out.println("User:: "+users);
+        usersService.addNew((Users) users);
         return "dashboard";
 
     }
