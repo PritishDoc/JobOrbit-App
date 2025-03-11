@@ -4,6 +4,7 @@ import com.joborbit.joborbit.entity.Users;
 import com.joborbit.joborbit.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -18,5 +19,8 @@ public class UsersService {
         users.setActive(true);
         users.setRegistrationDate(new Date(System.currentTimeMillis())); // Added import for Date
         return userRepository.save(users);  // Fixed repository usage
+    }
+    public Optional<Users> getUserByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class UsersController {
@@ -35,7 +36,15 @@ public class UsersController {
     }
 
     @PostMapping("/register/new")
-    public String userRegistration(@Valid @ModelAttribute("user") Users users) {
+    public String userRegistration(@Valid @ModelAttribute("user") Users users,Model model) {
+       Optional<Users>optionalUsers= usersService.getUserByEmail(users.getEmail());
+       if(optionalUsers.isPresent()){
+           model.addAttribute("error","Email is already registered, try to login or register with other email.");
+           List<UsersType> usersTypes = userTypeService.getAll();
+           model.addAttribute("getAllTypes", usersTypes);
+           model.addAttribute("user", new Users());
+           return "register";
+       }
         System.out.println("User: " + users);
         usersService.addNew(users);  // No casting needed
         return "redirect:/dashboard";  // Redirect to dashboard after successful registration
