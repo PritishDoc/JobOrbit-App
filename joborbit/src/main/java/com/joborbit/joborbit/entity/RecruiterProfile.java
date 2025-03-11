@@ -1,11 +1,10 @@
 package com.joborbit.joborbit.entity;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "job_seeker_profile")
-public class JobSeekerProfile {
+@Table(name = "recruiter_profile")
+public class RecruiterProfile {
 
     @Id
     private int userAccountId;
@@ -13,28 +12,23 @@ public class JobSeekerProfile {
     @OneToOne
     @JoinColumn(name = "user_account_id")
     @MapsId
-    private Users usersId;
+    private Users userId;
 
     private String firstName;
     private String lastName;
     private String city;
     private String state;
     private String country;
-    private String workAuthorization;
-    private String employmentType;
-    private String resume;
+    private String company;
 
     @Column(nullable = true, length = 64)
     private String profilePhoto;
 
-    @OneToMany(mappedBy = "jobSeekerProfile", cascade = CascadeType.ALL)
-    private List<Skills> skills;
-
-    public JobSeekerProfile() {
+    public RecruiterProfile() {
     }
 
-    public JobSeekerProfile(Users usersId) {
-        this.usersId = usersId;
+    public RecruiterProfile(Users userId) {
+        this.userId = userId;
     }
 
     public int getUserAccountId() {
@@ -45,12 +39,12 @@ public class JobSeekerProfile {
         this.userAccountId = userAccountId;
     }
 
-    public Users getUsersId() {
-        return usersId;
+    public Users getUserId() {
+        return userId;
     }
 
-    public void setUsersId(Users usersId) {
-        this.usersId = usersId;
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -93,28 +87,12 @@ public class JobSeekerProfile {
         this.country = country;
     }
 
-    public String getWorkAuthorization() {
-        return workAuthorization;
+    public String getCompany() {
+        return company;
     }
 
-    public void setWorkAuthorization(String workAuthorization) {
-        this.workAuthorization = workAuthorization;
-    }
-
-    public String getEmploymentType() {
-        return employmentType;
-    }
-
-    public void setEmploymentType(String employmentType) {
-        this.employmentType = employmentType;
-    }
-
-    public String getResume() {
-        return resume;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getProfilePhoto() {
@@ -125,29 +103,18 @@ public class JobSeekerProfile {
         this.profilePhoto = profilePhoto;
     }
 
-    public List<Skills> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<Skills> skills) {
-        this.skills = skills;
-    }
-
     @Override
     public String toString() {
-        return "JobSeekerProfile{" +
+        return "RecruiterProfile{" +
                 "userAccountId=" + userAccountId +
-                ", usersId=" + usersId +
+                ", userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", country='" + country + '\'' +
-                ", workAuthorization='" + workAuthorization + '\'' +
-                ", employmentType='" + employmentType + '\'' +
-                ", resume='" + resume + '\'' +
+                ", company='" + company + '\'' +
                 ", profilePhoto='" + profilePhoto + '\'' +
-                ", skills=" + skills +
                 '}';
     }
 }
