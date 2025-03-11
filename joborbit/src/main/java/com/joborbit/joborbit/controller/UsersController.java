@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/users")  // Group all user-related endpoints
 public class UsersController {
 
     private final UserTypeService userTypeService;
@@ -39,11 +40,11 @@ public class UsersController {
             return "register";
         }
         usersService.addNew(users);
-        return "redirect:/dashboard"; // Redirect to dashboard after successful registration
+        return "redirect:/users/dashboard";
     }
 
-    @GetMapping("/dashboard")  // ✅ FIX: Add mapping for dashboard
+    @GetMapping("/dashboard")
     public String dashboard() {
-        return "dashboard";  // ✅ FIX: Ensure this matches the file name in templates/
+        return "dashboard";
     }
 }

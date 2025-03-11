@@ -1,10 +1,8 @@
-package com.joborbit.joborbit.entity;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
@@ -21,16 +19,16 @@ public class Users {
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registrationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")  // Adjusted for LocalDate
+    private LocalDate registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId") // Fixed reference
+    @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     private UsersType userType;
 
     public Users() {}
 
-    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType userType) {
+    public Users(int userId, String email, String password, boolean isActive, LocalDate registrationDate, UsersType userType) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -71,11 +69,11 @@ public class Users {
         isActive = active;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDate getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDate registrationDate) {
         this.registrationDate = registrationDate;
     }
 

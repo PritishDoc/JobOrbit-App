@@ -9,7 +9,8 @@ import com.joborbit.joborbit.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Service
 public class UsersService {
@@ -28,7 +29,7 @@ public class UsersService {
 
     public Users addNew(Users users) {
         users.setActive(true);
-        users.setRegistrationDate(new Date());
+        users.setRegistrationDate(convertLocalDateToDate(LocalDate.now()));  // Convert LocalDate to Date
         Users savedUser = userRepository.save(users);
 
         int userTypeId = users.getUserType().getUserTypeId();
@@ -40,8 +41,12 @@ public class UsersService {
         return savedUser;
     }
 
+    // Helper method to convert LocalDate to Date
+    private Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
     public boolean emailExists(String email) {
-        List<Users> usersList = userRepository.findByEmail(email);
-        return !usersList.isEmpty(); // Ensures duplicate emails are handled
+        return userRepository.findByEmail(email).isPresent();
     }
 }
