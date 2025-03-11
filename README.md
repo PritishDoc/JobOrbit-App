@@ -1,5 +1,8 @@
 # JobOrbit - Job Search and Recruitment Platform
 
+![JobOrbit Screenshot](./images/screenshot1.png)
+![JobOrbit Dashboard](./images/screenshot2.png)
+
 ## Overview
 **JobOrbit** is a job search and recruitment platform that connects job seekers with recruiters. It allows candidates to search for jobs, apply for positions, and manage their profiles. Recruiters can post job listings, manage applications, and find the best talent for their organizations.
 
@@ -45,4 +48,3 @@ git clone https://github.com/yourusername/JobOrbit.git
 cd JobOrbit/backend
 mvn clean install
 mvn spring-boot:run
-
