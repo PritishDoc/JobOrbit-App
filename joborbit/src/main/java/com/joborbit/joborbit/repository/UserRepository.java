@@ -2,10 +2,8 @@ package com.joborbit.joborbit.repository;
 
 import com.joborbit.joborbit.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
+import java.util.List;
 
 public interface UserRepository extends JpaRepository<Users, Integer> {
-    Optional<Users>findByEmail(String email);
-
+    List<Users> findByEmail(String email);  // Returns list to handle multiple results
 }
