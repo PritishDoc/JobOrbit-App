@@ -1,7 +1,10 @@
 # JobOrbit - Job Search and Recruitment Platform
 
-![JobOrbit Screenshot](."C:\Users\priti\Pictures\Screenshots\Screenshot 2025-03-10 192528.png")
-![JobOrbit Dashboard](."C:\Users\priti\Pictures\Screenshots\Screenshot 2025-03-10 192542.png")
+# JobOrbit - Job Search and Recruitment Platform
+
+![JobOrbit Screenshot](Project%20Images/Screenshot%202025-03-10%20192528.png)
+![JobOrbit Dashboard](Project%20Images/Screenshot%202025-03-10%20192542.png)
+
 
 ## Overview
 **JobOrbit** is a job search and recruitment platform that connects job seekers with recruiters. It allows candidates to search for jobs, apply for positions, and manage their profiles. Recruiters can post job listings, manage applications, and find the best talent for their organizations.
