@@ -1,10 +1,11 @@
 package com.joborbit.joborbit.entity;
 
 import jakarta.persistence.*;
+
 import java.util.List;
 
 @Entity
-@Table(name = "user_type")
+@Table(name = "users_type")
 public class UsersType {
 
     @Id
@@ -15,11 +16,13 @@ public class UsersType {
 
     @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Users> users;
+    public UsersType() {
+    }
 
-    public UsersType() {}
-
-    public UsersType(String userTypeName) {
+    public UsersType(int userTypeId, String userTypeName, List<Users> users) {
+        this.userTypeId = userTypeId;
         this.userTypeName = userTypeName;
+        this.users = users;
     }
 
     public int getUserTypeId() {
@@ -36,6 +39,14 @@ public class UsersType {
 
     public void setUserTypeName(String userTypeName) {
         this.userTypeName = userTypeName;
+    }
+
+    public List<Users> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 
     @Override

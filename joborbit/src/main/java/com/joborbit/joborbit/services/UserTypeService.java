@@ -13,7 +13,8 @@ public class UserTypeService {
     public UserTypeService(UserTypeRepository userTypeRepository) {
         this.userTypeRepository = userTypeRepository;
     }
-    public List<UsersType> getAll(){
+
+    public List<UsersType> getAll() {
         return userTypeRepository.findAll();
     }
 }
