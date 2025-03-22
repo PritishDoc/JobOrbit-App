@@ -4,21 +4,21 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users_type") // Ensure table name matches DB
-public class UsersType { // Removed unnecessary inner class
+@Table(name = "user_type") // Changed to match DB table
+public class UsersType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int usersTypeId;  // Fixed field name consistency
+    @Column(name = "user_type_id") // Changed column name
+    private int usersTypeId;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "user_type_name", nullable = false, unique = true) // Added column name explicitly
     private String userTypeName;
 
-    @OneToMany(mappedBy = "usersType", cascade = CascadeType.ALL) // Fixed mappedBy
+    @OneToMany(mappedBy = "usersType", cascade = CascadeType.ALL)
     private List<Users> users;
 
-    public UsersType() {
-    }
+    public UsersType() {}
 
     public UsersType(int usersTypeId, String userTypeName, List<Users> users) {
         this.usersTypeId = usersTypeId;
