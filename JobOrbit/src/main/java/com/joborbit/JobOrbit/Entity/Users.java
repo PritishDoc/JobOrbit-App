@@ -3,18 +3,17 @@ package com.joborbit.JobOrbit.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class Users {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @NotEmpty
@@ -22,23 +21,23 @@ public class Users {
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "DD-MM-YYYY")
+    @DateTimeFormat(pattern = "dd-MM-yyyy") // Fixed date format
     private Date registrationDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userTypeId",referencedColumnName = "userTypeId")
-    private UsersType usersTypeId;
+    @ManyToOne
+    @JoinColumn(name = "usersTypeId", referencedColumnName = "usersTypeId") // Fixed FK name
+    private UsersType usersType; // Changed field name for clarity
 
     public Users() {
     }
 
-    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType usersTypeId) {
+    public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType usersType) {
         this.userId = userId;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
         this.registrationDate = registrationDate;
-        this.usersTypeId = usersTypeId;
+        this.usersType = usersType;
     }
 
     public int getUserId() {
@@ -81,12 +80,12 @@ public class Users {
         this.registrationDate = registrationDate;
     }
 
-    public UsersType getUsersTypeId() {
-        return usersTypeId;
+    public UsersType getUsersType() {
+        return usersType;
     }
 
-    public void setUsersTypeId(UsersType usersTypeId) {
-        this.usersTypeId = usersTypeId;
+    public void setUsersType(UsersType usersType) {
+        this.usersType = usersType;
     }
 
     @Override
@@ -97,7 +96,7 @@ public class Users {
                 ", password='" + password + '\'' +
                 ", isActive=" + isActive +
                 ", registrationDate=" + registrationDate +
-                ", usersTypeId=" + usersTypeId +
+                ", usersType=" + usersType +
                 '}';
     }
 }
