@@ -4,18 +4,18 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user_type") // Changed to match DB table
+@Table(name = "users_type") // Changed to match DB table
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_type_id") // Changed column name
-    private int usersTypeId;
+    private int userTypeId;
 
     @Column(name = "user_type_name", nullable = false, unique = true) // Added column name explicitly
     private String userTypeName;
 
-    @OneToMany(mappedBy = "usersType", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Users.class, mappedBy = "userType", cascade = CascadeType.ALL)
     private List<Users> users;
 
     public UsersType() {}
