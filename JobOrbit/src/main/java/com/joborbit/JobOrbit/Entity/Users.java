@@ -21,15 +21,14 @@ public class Users {
 
     private boolean isActive;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy") // Fixed date format
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date registrationDate;
 
     @ManyToOne
-    @JoinColumn(name = "usersTypeId", referencedColumnName = "usersTypeId") // Fixed FK name
-    private UsersType usersType; // Changed field name for clarity
+    @JoinColumn(name = "usersTypeId", referencedColumnName = "usersTypeId")
+    private UsersType usersType;
 
-    public Users() {
-    }
+    public Users() {}
 
     public Users(int userId, String email, String password, boolean isActive, Date registrationDate, UsersType usersType) {
         this.userId = userId;
@@ -40,53 +39,7 @@ public class Users {
         this.usersType = usersType;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public Date getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public UsersType getUsersType() {
-        return usersType;
-    }
-
-    public void setUsersType(UsersType usersType) {
-        this.usersType = usersType;
-    }
+    // Getters and Setters
 
     @Override
     public String toString() {
