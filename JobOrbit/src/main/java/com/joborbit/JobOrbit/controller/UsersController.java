@@ -46,6 +46,6 @@ public class UsersController {
             return "register";
         }
         usersService.addNew(users);
-        return "redirect:/dashboard/";
+        return "dashboard";
     }
 }
