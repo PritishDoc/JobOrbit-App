@@ -3,18 +3,20 @@ package com.joborbit.JobOrbit.Entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+
+
 @Entity
 @Table(name = "users_type")
 public class UsersType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private  int userTypeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userTypeId;
 
     private String userTypeName;
 
-    @OneToMany(targetEntity = Users.class, mappedBy = "usersTypeId", cascade = CascadeType.ALL)
-    private List<Users>users;
+    @OneToMany(targetEntity = Users.class, mappedBy = "userTypeId", cascade = CascadeType.ALL)
+    private List<Users> users;
 
     public UsersType() {
     }
