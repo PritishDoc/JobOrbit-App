@@ -1,8 +1,9 @@
 package com.joborbit.JobOrbit.config;
 
-package com.luv2code.jobportal.config;
 
-import com.luv2code.jobportal.services.CustomUserDetailsService;
+
+
+import com.joborbit.JobOrbit.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
