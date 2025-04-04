@@ -3,6 +3,8 @@ package com.joborbit.JobOrbit.controller;
 import com.joborbit.JobOrbit.Entity.RecruiterProfile;
 import com.joborbit.JobOrbit.Entity.Users;
 import com.joborbit.JobOrbit.repository.UsersRepository;
+import com.joborbit.JobOrbit.services.RecruiterProfileService;
+import com.joborbit.JobOrbit.util.FileUploadUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
